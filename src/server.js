@@ -10,7 +10,8 @@ app.post('/hello', (req, res) => {
   res.send(`Hello ${req.body.name}`);
 });
 
-app.get('/hello/:name', (req, res) => {
+app.get('/hello/:name/goodbye/:otherName', (req, res) => {
+  console.log(req.params);
   const { name } = req.params;
   res.send(`I'm lisening ${name}...`);
 });
