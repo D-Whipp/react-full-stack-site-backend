@@ -41,7 +41,6 @@ app.put('/api/articles/:name/upvote', async (req, res) => {
   const article = await db.collection('articles').findOne({ name });
 
   if (article) {
-    article.upvotes += 1;
     res.send(
       `The ${name} article now has ${article.upvotes} upvotes.`
     );
@@ -66,7 +65,6 @@ app.put('/api/articles/:name/downvote', async (req, res) => {
   const article = await db.collection('articles').findOne({ name });
 
   if (article) {
-    article.upvotes -= 1;
     res.send(
       `The ${name} article now has ${article.upvotes} upvotes.`
     );
@@ -78,8 +76,6 @@ app.put('/api/articles/:name/downvote', async (req, res) => {
 app.post('/api/articles/:name/comments', (req, res) => {
   const { name } = req.params;
   const { postedBy, text } = req.body;
-
-  const article = articlesInfo.find((a) => a.name === name);
 
   if (article) {
     article.comments.push({ postedBy, text });
