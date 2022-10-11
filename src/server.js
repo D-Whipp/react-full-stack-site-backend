@@ -50,9 +50,21 @@ app.put('/api/articles/:name/upvote', async (req, res) => {
   }
 });
 
-app.put('/api/articles/:name/downvote', (req, res) => {
+app.put('/api/articles/:name/downvote', async (req, res) => {
   const { name } = req.params;
-  const article = articlesInfo.find((a) => a.name === name);
+
+  const client = new MongoClient('mongodb://127.0.0.1:27017');
+
+  const db = client.db('react-blog-DB');
+  await db.collection('articles').updateOne(
+    { name },
+    {
+      $inc: { upvotes: -1 },
+    }
+  );
+
+  const article = await db.collection('articles').findOne({ name });
+
   if (article) {
     article.upvotes -= 1;
     res.send(
