@@ -63,6 +63,20 @@ app.post('/api/articles/:name/comments', (req, res) => {
   }
 });
 
+// app.post('/api/articles/:name/comments', (req, res) => {
+//   const { name } = req.params;
+//   const { postedBy, text } = req.body;
+
+//   const article = articlesInfo.find((a) => a.name === name);
+
+//   if (article) {
+//     article.comments.push({ postedBy, text });
+//     res.send(article.comments);
+//   } else {
+//     res.send('Article does not exist.');
+//   }
+// });
+
 app.listen(8000, () => {
   console.log("I'm listening...");
 });
