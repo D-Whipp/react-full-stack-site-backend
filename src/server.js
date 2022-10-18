@@ -1,5 +1,4 @@
 import express from 'express';
-import { MongoClient } from 'mongodb';
 import { db, connectToDb } from './db.js';
 // PUT /articles/learn-react/upvote
 
@@ -8,11 +7,6 @@ app.use(express.json());
 
 app.get('/api/articles/:name', async (req, res) => {
   const { name } = req.params;
-
-  const client = new MongoClient('mongodb://127.0.0.1:27017');
-  await client.connect();
-
-  const db = client.db('react-blog-DB');
 
   const article = await db
     .collection('articles')
@@ -28,18 +22,13 @@ app.get('/api/articles/:name', async (req, res) => {
 app.put('/api/articles/:name/upvote', async (req, res) => {
   const { name } = req.params;
 
-  const client = new MongoClient('mongodb://127.0.0.1:27017')
-  await client.connect();
-
-  const db = client.db('react-blog-DB')
-
   await db.collection('articles').updateOne(
     { name },
     {
       $inc: { upvotes: 1 },
     }
   );
-  
+
   const article = await db.collection('articles').findOne({ name });
 
   if (article) {
