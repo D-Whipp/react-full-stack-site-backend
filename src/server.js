@@ -88,6 +88,7 @@ app.put('/api/articles/:name/upvote', async (req, res) => {
   }
 });
 
+// downvote doesn't work
 app.put('/api/articles/:name/downvote', async (req, res) => {
   const { name } = req.params;
   const { uid } = req.user;
@@ -98,9 +99,9 @@ app.put('/api/articles/:name/downvote', async (req, res) => {
 
   if (article) {
     const upvoteIds = article.upvoteIds || [];
-    const canUpvote = uid && !upvoteIds.includes(uid);
+    const canDownvote = uid && !upvoteIds.includes(uid);
 
-    if (canUpvote) {
+    if (canDownvote) {
       await db.collection('articles').updateOne(
         { name },
         {
