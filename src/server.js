@@ -88,7 +88,6 @@ app.put('/api/articles/:name/upvote', async (req, res) => {
   }
 });
 
-// downvote doesn't work
 app.put('/api/articles/:name/downvote', async (req, res) => {
   const { name } = req.params;
   const { uid } = req.user;
@@ -132,6 +131,30 @@ app.post('/api/articles/:name/comments', async (req, res) => {
       $push: { comments: { postedBy: email, text } },
     }
   );
+
+  const article = await db.collection('articles').findOne({ name });
+
+  if (article) {
+    res.json(article);
+  } else {
+    res.send('Article does not exist.');
+  }
+});
+
+// left off here
+app.delete('/api/articles/:name/deleteComments', async (req, res) => {
+  const { name } = req.params;
+  const { text } = req.body;
+  const { email } = req.user;
+
+  // if (text && body) {
+  //   await db.collection('articles').updateOne(
+  //     { name },
+  //     {
+  //       $pop: { comments: { postedBy: email, text } },
+  //     }
+  //   );
+  // }
 
   const article = await db.collection('articles').findOne({ name });
 
