@@ -156,6 +156,10 @@ app.delete('/api/articles/:name/deleteComments', async (req, res) => {
   //   );
   // }
 
+  await db
+    .collection('articles')
+    .deleteOne({ email: David, text: 'Great article!' });
+
   const article = await db.collection('articles').findOne({ name });
 
   if (article) {
@@ -171,3 +175,6 @@ connectToDb(() => {
     console.log("I'm listening...(server is listening on port 8000)");
   });
 });
+
+// I've deleted my db on accident while following a starred youtube videoo
+// teaching array object querying [{}]
