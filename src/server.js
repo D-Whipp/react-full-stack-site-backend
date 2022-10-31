@@ -141,32 +141,8 @@ app.post('/api/articles/:name/comments', async (req, res) => {
   }
 });
 
-// left off here
 app.delete('/api/articles/:name/deleteComments', async (req, res) => {
-  const { name } = req.params;
-  const { text } = req.body;
-  const { email } = req.user;
-
-  // if (text && body) {
-  //   await db.collection('articles').updateOne(
-  //     { name },
-  //     {
-  //       $pop: { comments: { postedBy: email, text } },
-  //     }
-  //   );
-  // }
-
-  await db
-    .collection('articles')
-    .deleteOne({ email: David, text: 'Great article!' });
-
-  const article = await db.collection('articles').findOne({ name });
-
-  if (article) {
-    res.json(article);
-  } else {
-    res.send('Article does not exist.');
-  }
+  console.log("I'm listening...");
 });
 
 connectToDb(() => {
@@ -175,6 +151,3 @@ connectToDb(() => {
     console.log("I'm listening...(server is listening on port 8000)");
   });
 });
-
-// I've deleted my db on accident while following a starred youtube videoo
-// teaching array object querying [{}]
