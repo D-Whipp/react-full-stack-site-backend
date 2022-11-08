@@ -142,7 +142,16 @@ app.post('/api/articles/:name/comments', async (req, res) => {
 });
 
 app.delete('/api/articles/:name/deleteComments', async (req, res) => {
-  console.log("I'm listening...");
+  // const { name } = req.body.commentNode;
+  // const { body } = req.body;
+  const request = req.user;
+  console.log('Request: ', request);
+  // const response = res;
+  // console.log('Response: ', response);
+  // console.log('Delete comment request is listening...', name);
+  console.log('Delete comment request is listening...');
+  // res.json(name);
+  // res.json(body);
 });
 
 connectToDb(() => {
