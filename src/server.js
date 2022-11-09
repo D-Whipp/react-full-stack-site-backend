@@ -144,8 +144,11 @@ app.post('/api/articles/:name/comments', async (req, res) => {
 app.delete('/api/articles/:name/deleteComments', async (req, res) => {
   // const { name } = req.body.commentNode;
   // const { body } = req.body;
-  const request = req.user;
+  const request = req;
+  // const { id } = req.body;
+  // console.log('ID: ', id);
   console.log('Request: ', request);
+  // console.log('Body: ', body);
   // const response = res;
   // console.log('Response: ', response);
   // console.log('Delete comment request is listening...', name);
