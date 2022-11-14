@@ -146,28 +146,13 @@ app.post('/api/articles/:name/comments', async (req, res) => {
 
 app.delete('/api/articles/:name/deleteComments', async (req, res) => {
   const { name } = req.params;
-  // const { body } = req.body;
   const { email } = req.user;
   const user = req.user;
-  // console.log('DB: ', db.collection('articles').mongodb.comments);
-  // await db
-  //   .collection('articles')
-  //   .remove({ comments: { postedBy: email } });
-  await db
-    .collection('articles')
-    .findOneAndDelete({ postedBy: email });
-  // const { id } = req.body;
-  // console.log('ID: ', id);
+
   console.log('NAME: ', name);
   console.log('USER: ', user);
   console.log('EMAIL: ', email);
-  // console.log('Body: ', body);
-  // const response = res;
-  // console.log('Response: ', response);
-  // console.log('Delete comment request is listening...', name);
-  // console.log('Delete comment request is listening...');
-  // res.json(name);
-  // res.json(body);
+
 });
 
 connectToDb(() => {
